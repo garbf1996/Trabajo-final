@@ -1,11 +1,7 @@
-
-
-import React from 'react'
+import React from "react";
 
 const NuevoPlatillo = () => {
-  return (
-    <div>NuevoPlatillo</div>
-  )
-}
+  return <div>NuevoPlatillo</div>;
+};
 
-export default NuevoPlatillo
+export default NuevoPlatillo;

@@ -1,4 +1,5 @@
 import React from "react";
+
 import { NavLink } from "react-router-dom";
 
 const SibarOption = () => {
@@ -26,13 +27,6 @@ const SibarOption = () => {
           >
             {" "}
             Menu
-          </NavLink>
-          <NavLink
-            to='/nuevo-platillo'
-            className='block text-gray-400 font-bold p-2 hover:bg-yellow-400 hover:text-gray-900'
-          >
-            {" "}
-            Nuevo Platillo
           </NavLink>
         </nav>
       </div>
