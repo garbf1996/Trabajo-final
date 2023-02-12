@@ -5,11 +5,17 @@ import * as Yup from "yup";
 import { FirebaseContext } from "../../firabase";
 //useNavigate
 import { useNavigate } from "react-router-dom";
+import FileUploader from "react-firebase-file-uploader";
+
 const NuevoPlatillo = () => {
-  //Formulario y validacion con formik
+  //subiendo imagen
+  const [subiendo, guardarSubiendo] = React.useState(false);
+  //progreso de la imagen
+  const [progreso, guardarProgreso] = React.useState(0);
+  //url de la imagen
+  const [urlimagen, guardarUrlImagen] = React.useState("");
   const { firabaseAPP } = useContext(FirebaseContext);
   const navigate = useNavigate();
-
   const formik = useFormik({
     initialValues: {
       nombre: "",
@@ -21,18 +27,47 @@ const NuevoPlatillo = () => {
       nombre: Yup.string().required("El nombre del platillo es obligatorio"),
       precio: Yup.number().required("El precio es obligatorio"),
       categoria: Yup.string().required("La categoria es obligatoria"),
-      imagen: Yup.string().required("La imagen es obligatoria"),
     }),
     onSubmit: (datos) => {
       try {
         datos.existencia = true;
         firabaseAPP.db.collection("productos").add(datos);
+        datos.imagen = urlimagen;
         navigate("/menu");
       } catch (error) {
         console.log(error);
       }
     },
   });
+
+  //Todo lo relacionado con la imagen
+  const handleUploadStart = () => {
+    guardarProgreso(0);
+    guardarSubiendo(true);
+  };
+
+  const handleUploadError = (error) => {
+    guardarSubiendo(false);
+    console.log(error);
+  };
+
+  const handleUploadSuccess = async () => {
+    guardarProgreso(100);
+    guardarSubiendo(false);
+
+    //almacenar la url de destino
+    const url = await firabaseAPP.storage
+      .ref("productos")
+      .child(nombre)
+      .getDownloadURL();
+    guardarUrlImagen(url);
+  };
+
+  const handleProgress = (progreso) => {
+    guardarProgreso(progreso);
+
+    console.log(progreso);
+  };
 
   return (
     <>
@@ -119,14 +154,29 @@ const NuevoPlatillo = () => {
                 {" "}
                 Image
               </label>
-              <input
-                type='file'
+              <FileUploader
+                accept='image/*'
                 id='imagen'
-                value={formik.values.imagen}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                name='imagen'
+                randomizeFilename
+                storageRef={firabaseAPP.storage.ref("productos")}
+                onUploadStart={handleUploadStart}
+                onUploadError={handleUploadError}
+                onUploadSuccess={handleUploadSuccess}
+                onProgress={handleProgress}
               />
             </div>
+            {subiendo && (
+              <div className='h-12 relative w-full border'>
+                <div
+                  className='bg-green-500 absolute left-0 top-0 text-white px-2 text-sm h-12 flex items-center'
+                  style={{ width: `${progreso}%` }}
+                >
+                  {progreso}%
+                </div>
+              </div>
+            )}
+
             <div className='mb-4'>
               <label className='block text-gray-700 text-sm font-bold mb-2'>
                 {" "}
