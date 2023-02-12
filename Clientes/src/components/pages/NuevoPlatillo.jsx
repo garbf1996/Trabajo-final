@@ -3,11 +3,12 @@ import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FirebaseContext } from "../../firabase";
-
+//useNavigate
+import { useNavigate } from "react-router-dom";
 const NuevoPlatillo = () => {
   //Formulario y validacion con formik
   const { firabaseAPP } = useContext(FirebaseContext);
-  console.log(firabaseAPP);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -23,7 +24,13 @@ const NuevoPlatillo = () => {
       imagen: Yup.string().required("La imagen es obligatoria"),
     }),
     onSubmit: (datos) => {
-      console.log(datos);
+      try {
+        datos.existencia = true;
+        firabaseAPP.db.collection("productos").add(datos);
+        navigate("/menu");
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -87,6 +94,7 @@ const NuevoPlatillo = () => {
               </label>
               <select
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                id='categoria'
                 value={formik.values.categoria}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -126,6 +134,7 @@ const NuevoPlatillo = () => {
               </label>
               <textarea
                 className=' h-40 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                id='descripcion'
                 value={formik.values.descripcion}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
