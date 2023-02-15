@@ -8,7 +8,7 @@ const SibarOption = () => {
       <div className='p-6'>
         {" "}
         <p className='uppercase text-white text-2xl tracking-wide text-center font-bold'>
-          RestaurabtApp
+          Restaurate App
         </p>
         <p className='mt-3 text-gray-600'>
           Administra tu restaurant en las sigientes opciones:

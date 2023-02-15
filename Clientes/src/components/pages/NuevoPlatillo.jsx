@@ -51,7 +51,7 @@ const NuevoPlatillo = () => {
     console.log(error);
   };
 
-  const handleUploadSuccess = async () => {
+  const handleUploadSuccess = async (nombre) => {
     guardarProgreso(100);
     guardarSubiendo(false);
 
@@ -60,11 +60,14 @@ const NuevoPlatillo = () => {
       .ref("productos")
       .child(nombre)
       .getDownloadURL();
+
+    console.log(url);
+
     guardarUrlImagen(url);
   };
 
-  const handleProgress = (progreso) => {
-    guardarProgreso(progreso);
+  const handleProgress = async (progreso) => {
+    await guardarProgreso(progreso);
 
     console.log(progreso);
   };
