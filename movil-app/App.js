@@ -1,6 +1,4 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 //navigation
 import { NavigationContainer } from "@react-navigation/native";
 //react native stack
@@ -17,7 +15,6 @@ export default function App() {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName='Menu'
           screenOptions={{
             headerStyle: {
               backgroundColor: "#FFDA00",
@@ -29,6 +26,11 @@ export default function App() {
           }}
         >
           <Stack.Screen
+            name='NuevaOrden'
+            component={NuevaOrden}
+            options={{ title: "Nueva Orden" }}
+          />
+          <Stack.Screen
             name='Menu'
             component={Menu}
             options={{ title: "Menu" }}
@@ -37,11 +39,6 @@ export default function App() {
             name='DetallePlatillo'
             component={DetallePlatillo}
             options={{ title: "Detalle Platillo" }}
-          />
-          <Stack.Screen
-            name='NuevaOrden'
-            component={NuevaOrden}
-            options={{ title: "Nueva Orden" }}
           />
           <Stack.Screen
             name='ResumenPedido'
@@ -53,12 +50,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
