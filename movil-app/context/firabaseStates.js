@@ -1,8 +1,8 @@
 import React from "react";
 
 import { useReducer } from "react";
-import FirabaseContext from "./FirabaseContext";
-import FirebaseReducer from "./FirabaseReducer";
+import FirabaseContext from "./firabaseContext";
+import FirebaseReducer from "./firabaseReducer";
 
 import firebaseAPP from "../firebase";
 
