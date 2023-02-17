@@ -1,14 +1,16 @@
 import React from "react";
-import { Text } from "react-native";
 //importacion de react native
-import { StyleSheet, View, Button } from "react-native";
+import { StyleSheet, View, Button, Text } from "react-native";
 //importacion de react native base
+//useNavigation nos permite navegar entre pantallas
+import { useNavigation } from "@react-navigation/native";
 
 const NuevaOrden = () => {
+  //utilizar useNavigation
+  const navigation = useNavigation();
   return (
     <View style={styles.contenedor}>
-      <Text style={styles.titulo}>Nueva Orden</Text>
-      <Button title='Ir a Menu' />
+      <Button title='Nueva Orden' onPress={() => navigation.navigate("Menu")} />
     </View>
   );
 };
