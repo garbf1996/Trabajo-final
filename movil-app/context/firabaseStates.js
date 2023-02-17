@@ -4,7 +4,9 @@ import { useReducer } from "react";
 import FirabaseContext from "./FirabaseContext";
 import FirebaseReducer from "./FirabaseReducer";
 
-const firabaseStates = (props) => {
+import firebaseAPP from "../firebase";
+
+const FirabaseStates = (props) => {
   const initialState = {
     menu: [],
   };
@@ -15,6 +17,8 @@ const firabaseStates = (props) => {
     <FirabaseContext.Provider
       value={{
         menu: state.menu,
+
+        firebaseAPP,
       }}
     >
       {
@@ -25,4 +29,4 @@ const firabaseStates = (props) => {
   );
 };
 
-export default firabaseStates;
+export default FirabaseStates;
