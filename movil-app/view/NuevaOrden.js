@@ -18,7 +18,6 @@ const NuevaOrden = () => {
 const styles = StyleSheet.create({
   contenedor: {
     flex: 1,
-    backgroundColor: "#FFDA00",
   },
   titulo: {
     color: "#000",

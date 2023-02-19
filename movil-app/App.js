@@ -1,6 +1,7 @@
 import React from "react";
 //navigation
 import { NavigationContainer } from "@react-navigation/native";
+
 //react native stack
 import { createStackNavigator } from "@react-navigation/stack";
 import ResumenPedido from "./view/ResumenPedido";
