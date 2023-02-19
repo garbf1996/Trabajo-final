@@ -8,6 +8,9 @@ import { useNavigation } from "@react-navigation/native";
 const DetallePlatillo = () => {
   const { platillo } = useContext(PedidosContext);
 
+  //USER NAVIGETOR
+  const navigation = useNavigation();
+
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Detalle Platillo</Text>
@@ -16,10 +19,10 @@ const DetallePlatillo = () => {
       <Text style={styles.texto}>Categoria: {platillo.categoria}</Text>
       <Text style={styles.texto}>Descripcion: {platillo.descripcion}</Text>
       <Button
+        title='Ordenar Platillo'
         onPress={() => {
           navigation.navigate("FormularioPlatillo");
         }}
-        title='Agregar al Pedido'
       />
     </View>
   );

@@ -10,6 +10,7 @@ import DetallePlatillo from "./view/DetallePlatillo";
 import Menu from "./view/Menu";
 import FirabaseStates from "./context/firabaseStates";
 import PedidosState from "./pedidos/PedidosState";
+import FormularioPlatillo from "./view/FormularioPlatillo";
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,11 @@ export default function App() {
                 name='ResumenPedido'
                 component={ResumenPedido}
                 options={{ title: "Resumen Pedido" }}
+              />
+              <Stack.Screen
+                name='FormularioPlatillo'
+                component={FormularioPlatillo}
+                options={{ title: "Formulario Platillo" }}
               />
             </Stack.Navigator>
           </NavigationContainer>
