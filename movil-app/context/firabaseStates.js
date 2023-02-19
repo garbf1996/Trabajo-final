@@ -31,7 +31,6 @@ const FirabaseStates = (props) => {
         type: OBTERNER_PRODUCTOS,
         payload: platillos,
       });
-      console.log(platillos);
     }
   };
 
