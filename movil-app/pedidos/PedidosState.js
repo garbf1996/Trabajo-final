@@ -3,7 +3,7 @@ import React from "react";
 import { useReducer } from "react";
 import PedidosReducer from "./PedidosReducer";
 import PedidosContext from "./PedidosContext";
-import { SELECCIONAR_PRODUCTO } from "../types";
+import { CONFIRMAR_PEDIDO, SELECCIONAR_PRODUCTO } from "../types";
 
 const PedidosState = (props) => {
   const initialState = {
@@ -21,12 +21,21 @@ const PedidosState = (props) => {
     });
   };
 
+  //CONFIRM ORDER
+  const confirmOrder = (pedido) => {
+    dispatch({
+      type: CONFIRMAR_PEDIDO,
+      payload: pedido,
+    });
+  };
+
   return (
     <PedidosContext.Provider
       value={{
         pedido: state.pedido,
         platillo: state.platillo,
         selectProduct,
+        confirmOrder,
       }}
     >
       {

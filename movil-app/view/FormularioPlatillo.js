@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 //selecionar la cantidad de platillos
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 import PedidosContext from "../pedidos/PedidosContext";
 
+import { useNavigation } from "@react-navigation/native";
+
 const FormularioPlatillo = () => {
+  const navigation = useNavigation();
+
   //state para la cantidad de platillos
   const [cantidad, guardarCantidad] = useState(1);
 
@@ -11,7 +15,7 @@ const FormularioPlatillo = () => {
   const [total, guardarTotal] = useState(1);
 
   //context de pedidos
-  const { platillo } = useContext(PedidosContext);
+  const { platillo, confirmOrder } = useContext(PedidosContext);
 
   const { precio } = platillo;
 
@@ -35,6 +39,35 @@ const FormularioPlatillo = () => {
     }
   };
 
+  //Confirmar la orden
+
+  const confirmarOrden = () => {
+    Alert.alert(
+      "Deseas confirmar tu pedido?",
+      "Un pedido confirmado ya no se podra modificar",
+      [
+        {
+          text: "Confirmar",
+          onPress: () => {
+            const pedido = {
+              ...platillo,
+              cantidad,
+              total,
+            };
+            confirmOrder(pedido);
+
+            //redireccionar
+            navigation.navigate("ResumenPedido");
+          },
+        },
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+      ]
+    );
+  };
+
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Cantidad Platillos</Text>
@@ -49,6 +82,8 @@ const FormularioPlatillo = () => {
         <Button title='+' onPress={() => incrementar()} />
       </View>
       <Text style={styles.texto}>Total a Pagar: $ {total}</Text>
+
+      <Button title='Ordenar Platillo' onPress={() => confirmarOrden()} />
     </View>
   );
 };
@@ -70,11 +105,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 15,
     fontWeight: "bold",
-  },
-  input: {
-    height: 50,
-    margin: 20,
-    borderWidth: 1,
   },
 });
 
