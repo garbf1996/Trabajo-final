@@ -1,7 +1,9 @@
 import React from "react";
 
 export const GetPlaitillos = ({ platillo }) => {
-  const { nombre, precio, categoria, descripcion } = platillo;
+  const { nombre, precio, categoria, descripcion, imagen } = platillo;
+
+  console.log(platillo);
 
   return (
     <div className='w-full md:w-1/3 xl:w-1/4 p-3'>

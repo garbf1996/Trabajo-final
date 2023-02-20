@@ -8,7 +8,7 @@ const FormularioPlatillo = () => {
   const [cantidad, guardarCantidad] = useState(1);
 
   // total a pagar por la cantidad de platillos
-  const [total, guardarTotal] = useState(0);
+  const [total, guardarTotal] = useState(1);
 
   //context de pedidos
   const { platillo } = useContext(PedidosContext);
@@ -44,7 +44,7 @@ const FormularioPlatillo = () => {
         <TextInput
           style={styles.input}
           onChangeText={(cantidad) => guardarCantidad(cantidad)}
-          value={cantidad}
+          value={cantidad.toString()}
         />
         <Button title='+' onPress={() => incrementar()} />
       </View>
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    height: 40,
-    margin: 12,
+    height: 50,
+    margin: 20,
     borderWidth: 1,
   },
 });
